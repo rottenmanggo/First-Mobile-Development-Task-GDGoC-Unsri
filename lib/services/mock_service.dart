@@ -1,14 +1,14 @@
 import '../models/user.dart';
 
 class MockUserService {
-  Future<List<User>> fetchUsers({bool shouldFail = false}) async {
-    await Future.delayed(const Duration(seconds: 1));
+  Future<List<User>> fetchUsers({bool shouldFail = false}) async { //simulasi pemanggilan API secana asyncronous
+    await Future.delayed(const Duration(seconds: 1)); //simulasi waktu tunggu ke server 1 detik 
 
     if (shouldFail) {
       throw Exception("Failed to fetch users");
     }
 
-    return [
+    return [ //3 data dummy
       User(
         id: '1',
         email: 'notryanbabe@gmail.com',
