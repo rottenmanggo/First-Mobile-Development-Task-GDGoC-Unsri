@@ -1,38 +1,50 @@
-// ======================================================
-// TODO: USER MODEL
-// ======================================================
+class User {
+  final String id;
+  final String email;
+  final String? displayName;
+  final int age;
+  final bool isActive;
 
-// 1. Buat class bernama User.
+  const User({
+    required this.id,
+    required this.email,
+    this.displayName,
+    required this.age,
+    required this.isActive,
+  });
 
-// 2. Tambahkan properti berikut:
-//    - String id
-//    - String email
-//    - String? displayName (nullable)
-//    - int age
-//    - bool isActive
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json['id'] ?? '',
+        email: json['email'] ?? '',
+        displayName: json['displayName'],
+        age: json['age'] ?? 0,
+        isActive: json['isActive'] ?? false,
+      );
 
-// 3. Buat constructor dengan required keyword yang tepat.
-//    Pastikan null safety diterapkan dengan benar.
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'email': email,
+        'displayName': displayName,
+        'age': age,
+        'isActive': isActive,
+      };
 
-// 4. Buat factory constructor:
-//    factory User.fromJson(Map<String, dynamic> json)
-//
-//    Ketentuan:
-//    - Parsing semua field
-//    - Gunakan operator ?? jika diperlukan
-//    - Jangan gunakan forced unwrap (!) tanpa alasan jelas
+  User copyWith({
+    String? id,
+    String? email,
+    String? displayName,
+    int? age,
+    bool? isActive,
+  }) =>
+      User(
+        id: id ?? this.id,
+        email: email ?? this.email,
+        displayName: displayName ?? this.displayName,
+        age: age ?? this.age,
+        isActive: isActive ?? this.isActive,
+      );
 
-// 5. Buat method:
-//    Map<String, dynamic> toJson()
-//
-//    Ketentuan:
-//    - Semua properti dikembalikan dalam bentuk Map
-
-// 6. Buat method:
-//    User copyWith({...})
-//
-//    Ketentuan:
-//    - Semua parameter bersifat optional
-//    - Gunakan pola: field ?? this.field
-
-// 7. Tambahkan override toString() untuk debugging (opsional tapi disarankan)
+  @override
+  String toString() =>
+      'User(id: $id, email: $email, displayName: $displayName, age: $age, isActive: $isActive)';
+}
