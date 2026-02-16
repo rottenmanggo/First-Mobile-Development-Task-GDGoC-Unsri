@@ -7,6 +7,7 @@ void main() async {
 
   print("---Cek method fetchUsers() dengan asyncronous---");
 
+  // Demonstrasi async/await:
   try {
     final users = await service.fetchUsers();
 
@@ -17,6 +18,7 @@ void main() async {
     print("Error: $e");
   }
 
+  // Demonstrasi JSON parsing:
   print("\n---Cek JSON parsing---");
 
   Map<String, dynamic> dummyJson = {
@@ -33,14 +35,21 @@ void main() async {
   String UserFormatedJSON = encoder.convert(user);
   print(UserFormatedJSON); //biar bagus :D
 
+  // Demonstrasi null safety:
   print("\n---Cek null safety---");
 
   String name = user.displayName ?? "No Name";
   print("displayName: $name");
   print("panjang displayName: ${user.displayName?.length}");
 
+  // Demonstrasi copyWith():
   print("\n---Cek penggunaan copyWith()---");
 
+  print("\nSebelum:");
+  print(user);
+
   User updatedUser = user.copyWith(email: "corny@gmail.com");
+
+  print("\nSesudah:");
   print(updatedUser);
 }
