@@ -1,5 +1,6 @@
 import '../models/user.dart';
 import '../services/mock_service.dart';
+import 'dart:convert';
 
 void main() async {
   final service = MockUserService();
@@ -27,7 +28,10 @@ void main() async {
   };
   
   User user = User.fromJson(dummyJson);
-  print(user);
+
+  var encoder = const JsonEncoder.withIndent('  ');
+  String UserFormatedJSON = encoder.convert(user);
+  print(UserFormatedJSON); //biar bagus :D
 
   print("\n---Cek null safety---");
 
