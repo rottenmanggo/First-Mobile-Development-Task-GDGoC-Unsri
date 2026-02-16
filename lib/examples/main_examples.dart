@@ -1,34 +1,42 @@
-// ======================================================
-// TODO: MAIN EXAMPLES (ENTRY POINT)
-// ======================================================
+import '../models/user.dart';
+import '../services/mock_service.dart';
 
-// 1. Tambahkan void main() async { ... }
+void main() async {
+  final service = MockUserService();
 
-// 2. Import:
-//    - user.dart
-//    - mock_service.dart
+  print("---Cek method fetchUsers() dengan asyncronous---");
 
-// 3. Buat instance MockUserService.
+  try {
+    final users = await service.fetchUsers();
 
-// 4. Demonstrasi async/await:
-//    - Gunakan try-catch
-//    - Panggil fetchUsers()
-//    - Print hasilnya
-//    - Tangkap dan tampilkan error jika terjadi
+    for (var user in users) {
+      print(user);
+    }
+  } catch (e) {
+    print("Error: $e");
+  }
 
-// 5. Demonstrasi JSON parsing:
-//    - Buat Map<String, dynamic> dummyJson
-//    - Gunakan User.fromJson(dummyJson)
-//    - Print hasil object
+  print("\n---Cek JSON parsing---");
 
-// 6. Demonstrasi null safety:
-//    - Akses displayName menggunakan:
-//        user.displayName ?? "No Name"
-//    - Gunakan null-aware operator seperti ?. jika relevan
+  Map<String, dynamic> dummyJson = {
+    "id": "67",
+    "email": "gooner@goony.com",
+    "displayName": "Cornball",
+    "age": 45,
+    "isActive": true
+  };
+  
+  User user = User.fromJson(dummyJson);
+  print(user);
 
-// 7. Demonstrasi copyWith():
-//    - Buat object baru dari user lama dengan perubahan 1 field
-//    - Print hasilnya
+  print("\n---Cek null safety---");
 
-// 8. Pastikan file bisa dijalankan dengan:
-//    dart run lib/examples/main_examples.dart
+  String name = user.displayName ?? "No Name";
+  print("displayName: $name");
+  print("panjang displayName: ${user.displayName?.length}");
+
+  print("\n---Cek penggunaan copyWith()---");
+
+  User updatedUser = user.copyWith(email: "corny@gmail.com");
+  print(updatedUser);
+}
